@@ -1,13 +1,78 @@
 <template>
     <link href="node_modules/ag-grid-community/dist/styles/ag-grid.css" rel="stylesheet" />
     <link href="node_modules/ag-grid-community/dist/styles/ag-theme-balham.css" rel="stylesheet" />
-    <h2>Employees</h2>
-   
-    <ag-grid-aurelia #agGrid class="ag-theme-balham" enable-col-resize grid-options.bind="mainEmployeeGridOptions" api="mainEmployeeGridOptions.api" grid-ready.call="onReady($event)" row-data.bind="rowData"  style="width:100%; height:200px">
-        <ag-grid-column header-name="Name" field="name" width.bind="150" pinned.bind="true"></ag-grid-column>
-        <ag-grid-column header-name="Phone" field="phone" width.bind="150" pinned.bind="true"></ag-grid-column>
-        <ag-grid-column header-name="Address" field="address" width.bind="150" pinned.bind="true"></ag-grid-column>
 
-    </ag-grid-aurelia>
+    <div class="container-fluid">
 
+
+
+        <div id="tableWrapper">
+            <div id="employeeWrapper" class="col" style="padding-left:5px; padding-right:5px">
+                <div class="row">
+                    <div class="col-auto">
+                        <h3>Employees</h3>
+                    </div>
+
+                    <div class="col">
+                        <button if.bind="!isHalf" class="btn float-right" style="background-color:blueviolet; position:absolute; right:0px "
+                            click.delegate="rotateTables()">
+                            <img src="src/images/rotate.png" style="width:30px; " />
+                        </button>
+                    </div>
+
+                </div>
+
+                <ag-grid-aurelia #agGrid class="ag-theme-balham" enable-col-resize grid-options.bind="mainEmployeeGridOptions"
+                    api="mainEmployeeGridOptions.api" grid-ready.call="onReady($event)" row-data.bind="rowData" style="width:100%; height:200px">
+                    <ag-grid-column header-name="Name" field="name" width.bind="150" pinned.bind="true"></ag-grid-column>
+                    <ag-grid-column header-name="Phone" field="phone" width.bind="150" pinned.bind="true"></ag-grid-column>
+                    <ag-grid-column header-name="Address" field="address" width.bind="150" pinned.bind="true"></ag-grid-column>
+                    <ag-grid-column header-name="Currently Deployed" field="deployed" width.bind="150" pinned.bind="true"></ag-grid-column>
+                </ag-grid-aurelia>
+
+                <div class="row">
+                    <div class="col-auto">
+                        <button class="btn" style="background-color: blueviolet; color:white" >Move Selected Over</button>
+                    </div>
+
+                    <div class="col">
+                        <button class="btn" style="background-color: blueviolet; color:white">Edit Info</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div id="groupWrapper" class="col" style="padding-left:5px; padding-right:5px">
+
+                <div class="row">
+                    <div class="col-auto">
+                        <h3>Deploy</h3>
+                    </div>
+
+                    <div class="col">
+                        <button if.bind="isHalf" class="btn float-right" style="background-color:blueviolet; position:absolute; right:0px "
+                            click.delegate="rotateTables()">
+                            <img src="src/images/rotate.png" style="width:30px; " />
+                        </button>
+                    </div>
+
+                </div>
+                <ag-grid-aurelia #agGrid class="ag-theme-balham" enable-col-resize grid-options.bind="mainEmployeeGridOptions"
+                    api="mainEmployeeGridOptions.api" grid-ready.call="onReady($event)" row-data.bind="rowData" style="width:100%; height:200px">
+                    <ag-grid-column header-name="Name" field="name" width.bind="150" pinned.bind="true"></ag-grid-column>
+                    <ag-grid-column header-name="Phone" field="phone" width.bind="150" pinned.bind="true"></ag-grid-column>
+                    <ag-grid-column header-name="Address" field="address" width.bind="150" pinned.bind="true"></ag-grid-column>
+
+                </ag-grid-aurelia>
+
+                <div class="row">
+                        <div class="col-auto">
+                            <button class="btn" style="background-color: blueviolet; color:white" >Setup Deployment</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
 </template>
