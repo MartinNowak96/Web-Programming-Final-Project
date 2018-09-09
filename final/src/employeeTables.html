@@ -24,10 +24,10 @@
 
                 <ag-grid-aurelia #agGrid class="ag-theme-balham" enable-col-resize grid-options.bind="mainEmployeeGridOptions"
                     api="mainEmployeeGridOptions.api" grid-ready.call="onReady($event)" row-data.bind="rowData" style="width:100%; height:200px">
-                    <ag-grid-column header-name="Name" field="name" width.bind="150" pinned.bind="true"></ag-grid-column>
-                    <ag-grid-column header-name="Phone" field="phone" width.bind="150" pinned.bind="true"></ag-grid-column>
-                    <ag-grid-column header-name="Address" field="address" width.bind="150" pinned.bind="true"></ag-grid-column>
-                    <ag-grid-column header-name="Currently Deployed" field="deployed" width.bind="150" pinned.bind="true"></ag-grid-column>
+                    <ag-grid-column header-name="Name" field="name" width.bind="150" ></ag-grid-column>
+                    <ag-grid-column header-name="Phone" field="phone" width.bind="150" ></ag-grid-column>
+                    <ag-grid-column header-name="Address" field="address" width.bind="150" ></ag-grid-column>
+                    <ag-grid-column header-name="Currently Deployed" field="deployed" width.bind="150"  ></ag-grid-column>
                 </ag-grid-aurelia>
 
                 <div class="row">
@@ -69,7 +69,7 @@
 
                 <div class="row">
                         <div class="col-auto">
-                            <button class="btn" style="background-color: blueviolet; color:white" >Setup Deployment</button>
+                            <button class="btn" style="background-color: blueviolet; color:white" click.delegate="setUpDeploy()" >Setup Deployment</button>
                         </div>
                     </div>
             </div>

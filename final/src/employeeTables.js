@@ -1,14 +1,18 @@
 import { GridOptions, GridApi, ColumnApi } from "ag-grid-community";
+import {deploy} from "deploy";
 import { inject } from 'aurelia-framework'
+import {DialogService} from 'aurelia-dialog';
 
+
+@inject(DialogService)
 export class employeeTable {
     mainEmployeeGridOptions = GridOptions
     gridApi = GridApi
     columnApi = ColumnApi;
 
-    constructor() {
+    constructor(DialogService) {
         //console.log(this.gridOptions)
-
+        this.DialogService = DialogService;
         this.isHalf = false;
         this.employeeRowData = [{ name: "Martin Nowak", phone: "555-555-5555", address: "180 Smith Street, Middletown NY, 10940", deployed:"Yes" }]
 
@@ -56,4 +60,21 @@ export class employeeTable {
         console.log(e)
         console.log(this.mainEmployeeGridOptions)
     }
+
+
+    setUpDeploy(){
+        this.DialogService.open({ viewModel: deploy, model:{}, lock: true }).whenClosed(response => {
+            if (!response.wasCancelled) {
+              
+              
+            } else {
+             
+            }
+            //console.log(response.output);
+            
+            
+          });
+        
+    }
+    
 }

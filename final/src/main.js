@@ -4,6 +4,7 @@ export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .plugin('ag-grid-aurelia')
+    .plugin('aurelia-dialog')
     .feature('resources');
 
   if (environment.debug) {

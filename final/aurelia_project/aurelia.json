@@ -87,6 +87,12 @@
             "path": "../node_modules/ag-grid-aurelia",
             "main": "main"
           },
+          {
+            "name": "aurelia-dialog",
+            "path": "../node_modules/aurelia-dialog/dist/amd",
+            "main": "aurelia-dialog",
+            "resources": ["resources/*.js"]
+          },
 
           {
             "name": "aurelia-templating-resources",
