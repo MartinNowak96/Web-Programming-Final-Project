@@ -1,0 +1,13 @@
+<template>
+    <link href="node_modules/ag-grid-community/dist/styles/ag-grid.css" rel="stylesheet" />
+    <link href="node_modules/ag-grid-community/dist/styles/ag-theme-balham.css" rel="stylesheet" />
+    <h2>Employees</h2>
+   
+    <ag-grid-aurelia #agGrid class="ag-theme-balham" enable-col-resize grid-options.bind="mainEmployeeGridOptions" api="mainEmployeeGridOptions.api" grid-ready.call="onReady($event)" row-data.bind="rowData"  style="width:100%; height:200px">
+        <ag-grid-column header-name="Name" field="name" width.bind="150" pinned.bind="true"></ag-grid-column>
+        <ag-grid-column header-name="Phone" field="phone" width.bind="150" pinned.bind="true"></ag-grid-column>
+        <ag-grid-column header-name="Address" field="address" width.bind="150" pinned.bind="true"></ag-grid-column>
+
+    </ag-grid-aurelia>
+
+</template>

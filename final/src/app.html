@@ -1,0 +1,103 @@
+<template>
+  <require from="bootstrap/css/bootstrap.css"></require>
+  <div class="container-fluid">
+    <div class="row">
+      <div id="hambergerMenu" class="col-auto" style="width:80px; height:100vh; background-color:blueviolet; overflow:hidden">
+        <div class="row" style="width:200px">
+          <div class="col-auto" style="padding:0px">
+            <img src="./src/images/menu-alt-512.png" style="width:55px; margin:10px" click.delegate="hamMenuClck()" />
+          </div>
+
+        </div>
+
+        <!--Log in  -->
+        <div class="row menuRow" style="width:300px" click.delegate="goToLogIn()">
+          <div class="col-auto" style="padding:0px">
+            <img src="./src/images/user.png" style="width:55px; margin:10px" />
+          </div>
+
+          <div class="col" style="padding:0px; margin-left:3px">
+            <p class="menuTitle">Log In / Log Out </p>
+          </div>
+
+        </div>
+        <!--tables  -->
+        <div class="row menuRow" style="width:300px" click.delegate="goToTables()" >
+          <div class="col-auto" style="padding:0px">
+            <img src="./src/images/tables.png" style="width:55px; margin:10px" />
+          </div>
+
+          <div class="col" style="padding:0px; margin-left:3px">
+            <p class="menuTitle">Employee Tables </p>
+          </div>
+
+        </div>
+
+
+        <div class="row menuRow" style="width:300px" click.delegate="goToMap()" >
+          <div class="col-auto" style="padding:0px">
+            <img src="./src/images/map.png" style="height:60px; margin-left:18px; margin-right:15px" />
+          </div>
+
+          <div class="col" style="padding:0px; margin-left:3px">
+            <p class="menuTitle">Employee Map </p>
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+      <div class="col">
+        <router-view></router-view>
+      </div>
+
+    </div>
+  </div>
+
+  <style>
+    .menuTitle {
+      margin-top: 15px;
+      font-size: 25px;
+      font-weight: bold;
+      color: white
+    }
+     .menuRow:hover{
+       background-color:rgb(114, 114, 114)
+     }
+  </style>
+
+  <style>
+    .moveDivLeft {
+      animation: moveLeft .6s;
+      animation-timing-function: cubic-bezier(.14, .93, 0.24, 1);
+    }
+
+    .moveDivRight {
+      animation: moveRight .6s;
+      animation-timing-function: cubic-bezier(.14, .93, 0.24, 1);
+    }
+
+    @keyframes moveLeft {
+      from {
+        width: 300px;
+      }
+
+      to {
+        width: 80px;
+      }
+    }
+
+    @keyframes moveRight {
+      from {
+        width: 80px;
+      }
+
+      to {
+        width: 300px;
+      }
+    }
+  </style>
+
+</template>
