@@ -2,18 +2,39 @@ import { GridOptions, GridApi, ColumnApi } from "ag-grid-community";
 import {deploy} from "deploy";
 import { inject } from 'aurelia-framework'
 import {DialogService} from 'aurelia-dialog';
+import { EventAggregator } from 'aurelia-event-aggregator';
 
 
-@inject(DialogService)
+@inject(DialogService, EventAggregator)
 export class employeeTable {
     mainEmployeeGridOptions = GridOptions
     gridApi = GridApi
     columnApi = ColumnApi;
 
-    constructor(DialogService) {
+    constructor(DialogService,EventAggregator) {
         //console.log(this.gridOptions)
+        this.ea = EventAggregator;
         this.DialogService = DialogService;
         this.isHalf = false;
+        
+
+    }
+
+    attached() {
+
+        this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight- deployHeader.offsetHeight - deployButtons.offsetHeight-20)/2;
+        this.deployHeight = this.employeeGridHeight;
+
+        this.subscription = this.ea.subscribe('pageResize', response =>{
+            if(this.isHalf == false){
+                this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight- deployHeader.offsetHeight - deployButtons.offsetHeight-20)/2;
+                this.deployHeight = this.employeeGridHeight;
+            }else{
+                this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight-10);
+                this.deployHeight = this.employeeGridHeight;
+            }
+        })
+
         this.employeeRowData = [{ name: "Martin Nowak", phone: "555-555-5555", address: "180 Smith Street, Middletown NY, 10940", deployed:"Yes" }]
 
 
@@ -29,22 +50,21 @@ export class employeeTable {
 
     }
 
-    attached() {
-
-
-
-    }
-
     rotateTables() {
         if (this.isHalf == false) {
+            this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight-10);
+                this.deployHeight = this.employeeGridHeight;
             employeeWrapper.classList.remove("col")
             employeeWrapper.classList.add("col-6")
 
             groupWrapper.classList.remove("col")
             groupWrapper.classList.add("col-6")
             tableWrapper.classList.add("row")
+            
             this.isHalf = true;
         } else {
+            this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight- deployHeader.offsetHeight - deployButtons.offsetHeight-20)/2;
+                this.deployHeight = this.employeeGridHeight;
             this.isHalf = false
             employeeWrapper.classList.remove("col-6")
             employeeWrapper.classList.add("col")
@@ -52,6 +72,7 @@ export class employeeTable {
             groupWrapper.classList.remove("col-6")
             groupWrapper.classList.add("col")
             tableWrapper.classList.remove("row")
+            
         }
     }
 

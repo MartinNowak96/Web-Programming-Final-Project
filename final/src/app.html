@@ -1,6 +1,6 @@
 <template>
   <require from="bootstrap/css/bootstrap.css"></require>
-  <div stlye="width:100vw; height:100vh" >
+  <div stlye="width:100vw; height:100vh" resizeable resize.trigger="pageResize($event.detail) & throttle:60" >
   <div class="container-fluid" >
     <div class="row">
       <div id="hambergerMenu" class="col-auto" style="width:80px; height:100vh; background-color:blueviolet; overflow:hidden">
@@ -50,7 +50,7 @@
 
       </div>
 
-      <div class="col">
+      <div class="col" style="padding:0px">
         <router-view></router-view>
       </div>
 

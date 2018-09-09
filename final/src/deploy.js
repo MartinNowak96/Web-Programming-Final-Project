@@ -5,22 +5,30 @@ import { DialogController } from 'aurelia-dialog';
 
 export class deploy {
 
-    constructor() {
-
+    constructor(DialogController) {
+        this.DialogController = DialogController;
         const controlUrl = '//www.bing.com/api/maps/mapcontrol?callback=bingMapsLoaded';
-        const ready = new Promise(resolve => window['bingMapsLoaded'] = resolve);
+        this.ready = new Promise(resolve => window['bingMapsLoaded'] = resolve);
 
-        let scriptTag = document.createElement('script');
-        scriptTag.async = true;
-        scriptTag.defer = true;
-        scriptTag.src = controlUrl;
+        this.scriptTag = document.createElement('script');
+        this.scriptTag.async = true;
+        this.scriptTag.defer = true;
+        this.scriptTag.src = controlUrl;
     }
 
     attached() {
-        ready.then(() => {
-            this.map = new Microsoft.Maps.Map(this.container as HTMLElement, {
-              credentials: this.apiKey
+        mapWrapper.appendChild(this.scriptTag)
+        this.ready.then(() => {
+            this.map = new Microsoft.Maps.Map(mapWrapper, {
+              credentials: 'At2-XQeVvD3BK82klFryRbBFXgVMv8T1fgOsMIV3CyRHOFRn_OXuVAoNNm_abD7C'
             });
+        });
     }
+
+
+    closePopUp(){
+        this.DialogController.close()
+    }
+
 
 }

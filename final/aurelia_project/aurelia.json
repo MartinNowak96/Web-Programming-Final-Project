@@ -93,6 +93,16 @@
             "main": "aurelia-dialog",
             "resources": ["resources/*.js"]
           },
+          {
+            "name": "aurelia-resize",
+            "path": "../node_modules/aurelia-resize/dist/amd",
+            "main": "index"
+          },
+          {
+            "name": "element-resize-detector",
+            "path": "../node_modules/element-resize-detector/dist",
+            "main": "element-resize-detector"
+          },
 
           {
             "name": "aurelia-templating-resources",

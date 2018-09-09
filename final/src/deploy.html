@@ -5,9 +5,18 @@
     <center style= "top: 0px;">
         <ai-dialog>
             <div class='card search-panel heading-center' style="width:700px; height:470px;background-color:white; border-color:black;   ">
-                <div id="mapWrapper">
-
+                <div class="row" >
+                    <div class="col">
+                <div id="mapWrapper"  style="height:400px"></div>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="btn" >Submit</button>
+                    <button class="btn" click.delegate="closePopUp()" >Cancel</button>
                 </div>
+
+            </div>
             </div>
         </ai-dialog>
     </center>

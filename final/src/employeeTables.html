@@ -2,11 +2,11 @@
     <link href="node_modules/ag-grid-community/dist/styles/ag-grid.css" rel="stylesheet" />
     <link href="node_modules/ag-grid-community/dist/styles/ag-theme-balham.css" rel="stylesheet" />
 
-    <div class="container-fluid">
+    <div class="container-fluid" >
 
 
 
-        <div id="tableWrapper">
+        <div id="tableWrapper" style="padding-left:10px; padding-right:10px; margin:0px" >
             <div id="employeeWrapper" class="col" style="padding-left:5px; padding-right:5px">
                 <div class="row">
                     <div class="col-auto">
@@ -14,7 +14,7 @@
                     </div>
 
                     <div class="col">
-                        <button if.bind="!isHalf" class="btn float-right" style="background-color:blueviolet; position:absolute; right:0px "
+                        <button if.bind="!isHalf" class="btn float-right" style="background-color:blueviolet; position:absolute; right:0px; margin-right:15px "
                             click.delegate="rotateTables()">
                             <img src="src/images/rotate.png" style="width:30px; " />
                         </button>
@@ -22,17 +22,17 @@
 
                 </div>
 
-                <ag-grid-aurelia #agGrid class="ag-theme-balham" enable-col-resize grid-options.bind="mainEmployeeGridOptions"
-                    api="mainEmployeeGridOptions.api" grid-ready.call="onReady($event)" row-data.bind="rowData" style="width:100%; height:200px">
+                <ag-grid-aurelia id="employeeGrid" #agGrid class="ag-theme-balham" enable-col-resize grid-options.bind="mainEmployeeGridOptions"
+                    api="mainEmployeeGridOptions.api" grid-ready.call="onReady($event)" row-data.bind="rowData" css="width:100%; height:${employeeGridHeight}px">
                     <ag-grid-column header-name="Name" field="name" width.bind="150" ></ag-grid-column>
                     <ag-grid-column header-name="Phone" field="phone" width.bind="150" ></ag-grid-column>
                     <ag-grid-column header-name="Address" field="address" width.bind="150" ></ag-grid-column>
                     <ag-grid-column header-name="Currently Deployed" field="deployed" width.bind="150"  ></ag-grid-column>
                 </ag-grid-aurelia>
 
-                <div class="row">
+                <div class="row" id="employeeGridButtons">
                     <div class="col-auto">
-                        <button class="btn" style="background-color: blueviolet; color:white" >Move Selected Over</button>
+                        <button class="btn" style="background-color: blueviolet; color:white" >Move Selected To Deploy</button>
                     </div>
 
                     <div class="col">
@@ -46,13 +46,13 @@
 
             <div id="groupWrapper" class="col" style="padding-left:5px; padding-right:5px">
 
-                <div class="row">
+                <div class="row" id="deployHeader">
                     <div class="col-auto">
                         <h3>Deploy</h3>
                     </div>
 
                     <div class="col">
-                        <button if.bind="isHalf" class="btn float-right" style="background-color:blueviolet; position:absolute; right:0px "
+                        <button if.bind="isHalf" class="btn float-right" style="background-color:blueviolet; position:absolute; right:0px; margin-right:15px  "
                             click.delegate="rotateTables()">
                             <img src="src/images/rotate.png" style="width:30px; " />
                         </button>
@@ -60,14 +60,14 @@
 
                 </div>
                 <ag-grid-aurelia #agGrid class="ag-theme-balham" enable-col-resize grid-options.bind="mainEmployeeGridOptions"
-                    api="mainEmployeeGridOptions.api" grid-ready.call="onReady($event)" row-data.bind="rowData" style="width:100%; height:200px">
+                    api="mainEmployeeGridOptions.api" grid-ready.call="onReady($event)" row-data.bind="rowData" css="width:100%; height:${deployHeight}px">
                     <ag-grid-column header-name="Name" field="name" width.bind="150" pinned.bind="true"></ag-grid-column>
                     <ag-grid-column header-name="Phone" field="phone" width.bind="150" pinned.bind="true"></ag-grid-column>
                     <ag-grid-column header-name="Address" field="address" width.bind="150" pinned.bind="true"></ag-grid-column>
 
                 </ag-grid-aurelia>
 
-                <div class="row">
+                <div class="row" id="deployButtons" >
                         <div class="col-auto">
                             <button class="btn" style="background-color: blueviolet; color:white" click.delegate="setUpDeploy()" >Setup Deployment</button>
                         </div>
