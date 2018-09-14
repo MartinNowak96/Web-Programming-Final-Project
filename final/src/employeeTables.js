@@ -24,7 +24,7 @@ export class employeeTable {
 
         this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight- deployHeader.offsetHeight - deployButtons.offsetHeight-20)/2;
         this.deployHeight = this.employeeGridHeight;
-
+        this.deployData = [];
         this.subscription = this.ea.subscribe('pageResize', response =>{
             if(this.isHalf == false){
                 this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight- deployHeader.offsetHeight - deployButtons.offsetHeight-20)/2;
@@ -35,11 +35,22 @@ export class employeeTable {
             }
         })
 
-        this.employeeRowData = [{ name: "Martin Nowak", phone: "555-555-5555", address: "180 Smith Street, Middletown NY, 10940", deployed:"Yes" }]
+        this.employeeRowData = [{ id: '1' , name: "Martin Nowak", phone: "555-555-5555", address: "180 Smith Street, Middletown NY, 10940", deployed:"Yes" },
+        { id: '2' , name: "John Doe", phone: "555-555-5555", address: "180 Smith Street, Middletown NY, 10940", deployed:"Yes" }]
 
 
         this.mainEmployeeGridOptions = {
             rowData: this.employeeRowData,
+            enableSorting: true,
+            animateRows: true,
+            sortingOrder: ['desc', 'asc', null],
+            rowSelection: 'multiple',
+            rowHeight: "40",
+
+        };
+
+        this.deployGridOptions = {
+            rowData: this.deployData,
             enableSorting: true,
             animateRows: true,
             sortingOrder: ['desc', 'asc', null],
@@ -77,9 +88,7 @@ export class employeeTable {
     }
 
     onReady(e) {
-        console.log("hi")
-        console.log(e)
-        console.log(this.mainEmployeeGridOptions)
+      
     }
 
 
@@ -96,6 +105,25 @@ export class employeeTable {
             
           });
         
+    }
+
+    moveToSelected(){
+       let selected = this.mainEmployeeGridOptions.api.getSelectedRows();
+        
+       selected.forEach(employee => {
+           let isInList =false;
+        this.deployData.forEach(employee2 =>{
+               if(employee.id == employee2.id){
+                   isInList =true
+               }
+           });
+           if(isInList ==false){
+               this.deployData.push(employee)
+           }
+       });
+       
+    console.log(this.deployGridOptions)
+       this.deployGridOptions.api.setRowData(this.deployData);
     }
     
 }
