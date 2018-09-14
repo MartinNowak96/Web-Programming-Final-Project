@@ -1,0 +1,36 @@
+<template>
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-auto" style="padding:0px; width:300px;background-color:rgb(70, 70, 70); text-align:center">
+                <h2 style="color:white; text-decoration:underline">Deployed Groups</h2>
+
+                <template repeat.for="group of employeeGroups">
+                    <div style="background-color:blueviolet; color:white; font-size:23px">
+                        ${group.groupID}
+                    </div>
+
+
+                    <template repeat.for="employee of group.employees">
+                        <div style="color:white; font-size:20   px">
+                            ${employee.name}
+                        </div>
+
+                    </template>
+                </template>
+
+            </div>
+
+            <div class="col" style="padding:0px">
+                <div id="mapWrapper" style="height:100vh">
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</template>

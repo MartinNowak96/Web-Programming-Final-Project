@@ -25,6 +25,14 @@ export class deploy {
         });
     }
 
+    submit(){
+        let start = startDate.Value;
+        console.log(start);
+        let end = endDate.Value;
+        console.log(this.startDate);
+        console.log(endDate)
+
+    }
 
     closePopUp(){
         this.DialogController.close()

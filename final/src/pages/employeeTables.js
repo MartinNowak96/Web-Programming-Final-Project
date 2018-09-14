@@ -1,5 +1,5 @@
 import { GridOptions, GridApi, ColumnApi } from "ag-grid-community";
-import {deploy} from "deploy";
+import {deploy} from "Popups/deploy";
 import { inject } from 'aurelia-framework'
 import {DialogService} from 'aurelia-dialog';
 import { EventAggregator } from 'aurelia-event-aggregator';
@@ -35,8 +35,18 @@ export class employeeTable {
             }
         })
 
-        this.employeeRowData = [{ id: '1' , name: "Martin Nowak", phone: "555-555-5555", address: "180 Smith Street, Middletown NY, 10940", deployed:"Yes" },
-        { id: '2' , name: "John Doe", phone: "555-555-5555", address: "180 Smith Street, Middletown NY, 10940", deployed:"Yes" }]
+        this.employeeRowData = [{ id: '1' , name: "Martin Nowak", phone: "555-555-5555", address: "180 Smith Street, Middletown NY, 10940", deployed:"Yes", nextDeployDate: "", 
+        deployments:[{startDate: "8/2/2018", endDate: "8/3/2018"},{startDate: "8/20/2018", endDate: "8/22/2018"} ] },
+
+        { id: '2' , name: "John Doe", phone: "555-555-5555", address: "180 Smith Street, Middletown NY, 10940", deployed:"Yes", nextDeployDate: "", 
+        deployments:[{startDate: "8/15/2018", endDate: "8/18/2018"},{startDate: "8/20/2018", endDate: "8/22/2018"},
+     ]  }]
+
+        this.employeeRowData.forEach(employee => {
+            if(employee.deployments.length > 0){
+               employee.nextDeployDate = employee.deployments[0].startDate; //this has to be changed to see if todays date is in the date range of the first deployment
+            }
+        });
 
 
         this.mainEmployeeGridOptions = {
@@ -93,7 +103,7 @@ export class employeeTable {
 
 
     setUpDeploy(){
-        this.DialogService.open({ viewModel: deploy, model:{}, lock: true }).whenClosed(response => {
+        this.DialogService.open({ viewModel: deploy, model:{employeeCount: this.deployData.length}, lock: true }).whenClosed(response => {
             if (!response.wasCancelled) {
               
               

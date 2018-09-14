@@ -55,9 +55,9 @@ export class App {
     this.router = router;
     config.title = 'App Name';
     config.map([
-      { route: ['', 'login'], name: 'logIn', moduleId: 'login', title: 'Log In' },
-      { route: ['employeeTable'], name: 'employeesTables', moduleId: 'employeeTables', title: 'Tables' },
-      { route: ['employeeMap'], name: 'employeeMap', moduleId: 'employeeMap', title: 'Map' }
+      { route: ['', 'login'], name: 'logIn', moduleId: 'pages/login', title: 'Log In' },
+      { route: ['employeeTable'], name: 'employeesTables', moduleId: 'pages/employeeTables', title: 'Tables' },
+      { route: ['employeeMap'], name: 'employeeMap', moduleId: 'pages/employeeMap', title: 'Map' }
     ]);
   }
 

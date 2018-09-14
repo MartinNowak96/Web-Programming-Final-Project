@@ -1,4 +1,10 @@
-export class employeeMap{
+import { inject } from 'aurelia-framework';
+import { DialogController } from 'aurelia-dialog';
+
+@inject(DialogController)
+
+export class deploy {
+
     constructor(DialogController) {
         this.DialogController = DialogController;
         const controlUrl = '//www.bing.com/api/maps/mapcontrol?callback=bingMapsLoaded';
@@ -18,4 +24,19 @@ export class employeeMap{
             });
         });
     }
+
+    submit(){
+        let start = startDate.Value;
+        console.log(start);
+        let end = endDate.Value;
+        console.log(this.startDate);
+        console.log(endDate)
+
+    }
+
+    closePopUp(){
+        this.DialogController.close()
+    }
+
+
 }
