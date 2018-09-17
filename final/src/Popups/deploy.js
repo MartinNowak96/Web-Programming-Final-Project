@@ -26,11 +26,12 @@ export class deploy {
     }
 
     submit(){
-        let start = startDate.Value;
+        let start = startDate.value;
         console.log(start);
-        let end = endDate.Value;
-        console.log(this.startDate);
-        console.log(endDate)
+        let end = endDate.value;
+        console.log(end)
+
+        
 
     }
 

@@ -4,36 +4,27 @@
 
     <center style="top: 0px;">
         <ai-dialog>
-            <div class='card search-panel heading-center' style="width:700px; height:570px;background-color:white; border-color:black;   ">
+            <div class='card search-panel heading-center' style="width:700px; height:570px;background-color:white; border-color:blueviolet;   ">
                 <div class="row">
                     <div class="col">
-                        <div id="mapWrapper" style="height:400px"></div>
+                        <h3>Martin Nowak </h3>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        <h3>Start Date</h3>
-                        <input id="startDate" type="date" />
-                    </div>
-                    <div class="col">
-                        <h3>End Date</h3>
-                        <input id="endDate" type="date" />
-                    </div>
-
                 </div>
 
                 <div class="row">
                     <div class="col" style="padding-left:20px; padding-right:20px">
-                        <input type="text" style="width:100%; " placeholder="Description..." />
+                        <ag-grid-aurelia #agGrid class="ag-theme-balham" enable-col-resize grid-options.bind="deploymentGridOptions"
+                            api="deploymentGridOptions.api" row-data.bind="rowData" style="width:100%; height:300px">
+                            <ag-grid-column header-name="Start Date" field="startDate" width.bind="150"></ag-grid-column>
+                            <ag-grid-column header-name="End Date" field="endDate" width.bind="150"></ag-grid-column>
+                            <ag-grid-column header-name="Description" field="description" width.bind="150"></ag-grid-column>
+                        </ag-grid-aurelia>
                     </div>
                 </div>
 
+
                 <div class="row">
-                    <div class="col-auto">
-                        <h4 style="display:inline">Employee Count: </h4>
-                        <h4 style="display:inline" >3</h4>
-                    </div>
+
                     <div class="col">
                         <button class="btn" id="button" click.delegate="submit()">Submit</button>
                         <button class="btn" click.delegate="closePopUp()">Cancel</button>

@@ -1,5 +1,6 @@
 import { GridOptions, GridApi, ColumnApi } from "ag-grid-community";
 import {deploy} from "Popups/deploy";
+import {deployments} from "Popups/deployments";
 import { inject } from 'aurelia-framework'
 import {DialogService} from 'aurelia-dialog';
 import { EventAggregator } from 'aurelia-event-aggregator';
@@ -19,18 +20,19 @@ export class employeeTable {
         
 
     }
+        
 
     attached() {
 
-        this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight- deployHeader.offsetHeight - deployButtons.offsetHeight-20)/2;
+        this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight- deployHeader.offsetHeight - deployButtons.offsetHeight-50)/2;
         this.deployHeight = this.employeeGridHeight;
         this.deployData = [];
         this.subscription = this.ea.subscribe('pageResize', response =>{
             if(this.isHalf == false){
-                this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight- deployHeader.offsetHeight - deployButtons.offsetHeight-20)/2;
+                this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight- deployHeader.offsetHeight - deployButtons.offsetHeight-50)/2;
                 this.deployHeight = this.employeeGridHeight;
             }else{
-                this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight-10);
+                this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight-50);
                 this.deployHeight = this.employeeGridHeight;
             }
         })
@@ -39,7 +41,7 @@ export class employeeTable {
         deployments:[{startDate: "8/2/2018", endDate: "8/3/2018"},{startDate: "8/20/2018", endDate: "8/22/2018"} ] },
 
         { id: '2' , name: "John Doe", phone: "555-555-5555", address: "180 Smith Street, Middletown NY, 10940", deployed:"Yes", nextDeployDate: "", 
-        deployments:[{startDate: "8/15/2018", endDate: "8/18/2018"},{startDate: "8/20/2018", endDate: "8/22/2018"},
+        deployments:[{startDate: "8/15/2018", endDate: "8/18/2018", description:"Fix computer"},{startDate: "8/20/2018", endDate: "8/22/2018", description:"Remove virus"},
      ]  }]
 
         this.employeeRowData.forEach(employee => {
@@ -73,7 +75,7 @@ export class employeeTable {
 
     rotateTables() {
         if (this.isHalf == false) {
-            this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight-10);
+            this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight-50);
                 this.deployHeight = this.employeeGridHeight;
             employeeWrapper.classList.remove("col")
             employeeWrapper.classList.add("col-6")
@@ -84,7 +86,7 @@ export class employeeTable {
             
             this.isHalf = true;
         } else {
-            this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight- deployHeader.offsetHeight - deployButtons.offsetHeight-20)/2;
+            this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight- deployHeader.offsetHeight - deployButtons.offsetHeight-60)/2;
                 this.deployHeight = this.employeeGridHeight;
             this.isHalf = false
             employeeWrapper.classList.remove("col-6")
@@ -134,6 +136,21 @@ export class employeeTable {
        
     console.log(this.deployGridOptions)
        this.deployGridOptions.api.setRowData(this.deployData);
+    }
+ 
+    viewDeployment(){
+        let selected = this.mainEmployeeGridOptions.api.getSelectedRows();
+        this.DialogService.open({ viewModel: deployments, model:selected[0], lock: true }).whenClosed(response => {
+            if (!response.wasCancelled) {
+              
+              
+            } else {
+             
+            }
+            //console.log(response.output);
+            
+            
+          });
     }
     
 }

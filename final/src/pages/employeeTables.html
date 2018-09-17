@@ -2,11 +2,11 @@
     <link href="node_modules/ag-grid-community/dist/styles/ag-grid.css" rel="stylesheet" />
     <link href="node_modules/ag-grid-community/dist/styles/ag-theme-balham.css" rel="stylesheet" />
 
-    <div class="container-fluid" >
+    <div class="container-fluid">
 
 
 
-        <div id="tableWrapper" style="padding-left:10px; padding-right:10px; margin:0px" >
+        <div id="tableWrapper" style="padding-left:10px; padding-right:10px; margin:0px">
             <div id="employeeWrapper" class="col" style="padding-left:5px; padding-right:5px">
                 <div class="row">
                     <div class="col-auto">
@@ -21,23 +21,31 @@
                     </div>
 
                 </div>
-
-                <ag-grid-aurelia id="employeeGrid" #agGrid class="ag-theme-balham" enable-col-resize grid-options.bind="mainEmployeeGridOptions"
-                    api="mainEmployeeGridOptions.api" grid-ready.call="onReady($event)" row-data.bind="rowData" css="width:100%; height:${employeeGridHeight}px">
-                    <ag-grid-column header-name="Name" field="name" width.bind="150" ></ag-grid-column>
-                    <ag-grid-column header-name="Phone" field="phone" width.bind="150" ></ag-grid-column>
-                    <ag-grid-column header-name="Address" field="address" width.bind="150" ></ag-grid-column>
-                    <ag-grid-column header-name="Currently Deployed" field="deployed" width.bind="150"  ></ag-grid-column>
-                    <ag-grid-column header-name="Next Deploy Date" field="nextDeployDate" width.bind="150"  ></ag-grid-column>
-                </ag-grid-aurelia>
-
-                <div class="row" id="employeeGridButtons">
+                <div class="row">
+                    <div class="col">
+                        <ag-grid-aurelia id="employeeGrid" #agGrid class="ag-theme-balham" enable-col-resize
+                            grid-options.bind="mainEmployeeGridOptions" api="mainEmployeeGridOptions.api"
+                            grid-ready.call="onReady($event)" row-data.bind="rowData" css=" height:${employeeGridHeight}px">
+                            <ag-grid-column header-name="Name" field="name" width.bind="150"></ag-grid-column>
+                            <ag-grid-column header-name="Phone" field="phone" width.bind="150"></ag-grid-column>
+                            <ag-grid-column header-name="Address" field="address" width.bind="150"></ag-grid-column>
+                            <ag-grid-column header-name="Currently Deployed" field="deployed" width.bind="150"></ag-grid-column>
+                            <ag-grid-column header-name="Next Deploy Date" field="nextDeployDate" width.bind="150"></ag-grid-column>
+                        </ag-grid-aurelia>
+                    </div>
+                </div>
+                <div class="row" id="employeeGridButtons" style="overflow:hidden">
                     <div class="col-auto">
-                        <button class="btn" style="background-color: blueviolet; color:white" click.delegate="moveToSelected()" >Move Selected To Deploy</button>
+                        <button class="btn" style="background-color: blueviolet; color:white" click.delegate="moveToSelected()">Move
+                            Selected To Deploy</button>
                     </div>
 
-                    <div class="col">
+                    <div class="col-auto" style="padding:0px">
                         <button class="btn" style="background-color: blueviolet; color:white">Edit Info</button>
+                    </div>
+
+                    <div class="col-auto">
+                        <button class="btn" style="background-color: blueviolet; color:white" click.delegate="viewDeployment()" >View Deployments</button>
                     </div>
 
                 </div>
@@ -60,21 +68,25 @@
                     </div>
 
                 </div>
-                <ag-grid-aurelia #agGrid class="ag-theme-balham" enable-col-resize grid-options.bind="deployGridOptions"
-                    api="deployGridOptions.api" grid-ready.call="onReady($event)" row-data.bind="rowData" css="width:100%; height:${deployHeight}px">
-                    <ag-grid-column header-name="Name" field="name" width.bind="150" ></ag-grid-column>
-                    <ag-grid-column header-name="Phone" field="phone" width.bind="150" ></ag-grid-column>
-                    <ag-grid-column header-name="Address" field="address" width.bind="150" ></ag-grid-column>
-                    <ag-grid-column header-name="Currently Deployed" field="deployed" width.bind="150"  ></ag-grid-column>
-                    <ag-grid-column header-name="Next Deploy Date" field="nextDeployDate" width.bind="150"  ></ag-grid-column>
+                <div class="row">
+                    <div class="col">
+                        <ag-grid-aurelia #agGrid class="ag-theme-balham" enable-col-resize grid-options.bind="deployGridOptions"
+                            api="deployGridOptions.api" grid-ready.call="onReady($event)" row-data.bind="rowData" css="width:100%; height:${deployHeight}px">
+                            <ag-grid-column header-name="Name" field="name" width.bind="150"></ag-grid-column>
+                            <ag-grid-column header-name="Phone" field="phone" width.bind="150"></ag-grid-column>
+                            <ag-grid-column header-name="Address" field="address" width.bind="150"></ag-grid-column>
+                            <ag-grid-column header-name="Currently Deployed" field="deployed" width.bind="150"></ag-grid-column>
+                            <ag-grid-column header-name="Next Deploy Date" field="nextDeployDate" width.bind="150"></ag-grid-column>
 
-                </ag-grid-aurelia>
-
-                <div class="row" id="deployButtons" >
-                        <div class="col-auto">
-                            <button class="btn" style="background-color: blueviolet; color:white" click.delegate="setUpDeploy()" >Setup Deployment</button>
-                        </div>
+                        </ag-grid-aurelia>
                     </div>
+                </div>
+                <div class="row" id="deployButtons">
+                    <div class="col-auto">
+                        <button class="btn" style="background-color: blueviolet; color:white" click.delegate="setUpDeploy()">Setup
+                            Deployment</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
