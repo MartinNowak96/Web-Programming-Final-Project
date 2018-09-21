@@ -20,15 +20,18 @@ export class employeeMap{
         this.ready.then(() => {
             this.map = new Microsoft.Maps.Map(mapWrapper, {
               credentials: 'At2-XQeVvD3BK82klFryRbBFXgVMv8T1fgOsMIV3CyRHOFRn_OXuVAoNNm_abD7C'
+            
             });
+
+            this.employeeGroups.forEach(group =>{
+                var location = new Microsoft.Maps.Location(group.longitude,group.latitude)
+                var pushpin = new Microsoft.Maps.Pushpin(location);
+                this.map.entities.push(pushpin)
 
             this.viewChangeHandler = Microsoft.Maps.Events.addHandler(this.map, 'viewchange', e => {
                 this.location = this.map.getCenter();
 
-                this.employeeGroups.forEach(group =>{
-                    var location = new Microsoft.Maps.Location(group.longitude,group.latitude)
-                    var pushpin = new Microsoft.Maps.Pushpin(location);
-                    this.map.entities.push(pushpin)
+                
                 })
             });
 
