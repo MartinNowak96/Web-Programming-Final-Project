@@ -10,8 +10,9 @@ export class employeeMap{
         this.scriptTag.src = controlUrl;
 
 
-        this.employeeGroups =[ { groupID: 1, employees:[{name:"Martin Nowak"}, {name:"John Doe"}] },
-        { groupID: 2, employees:[{name:"Martin Nowak"}, {name:"John Doe"}] } ]
+        this.employeeGroups =[ { groupID: 1, employees:[{name:"Martin Nowak"}, {name:"John Doe"}], longitude:40.7, latitude:-74 },
+        { groupID: 2, employees:[{name:"Martin Nowak"}, {name:"John Doe"}], longitude:40.71, latitude:-74.1 },
+        { groupID: 3, employees:[{name:"Martin Nowak"}, {name:"John Doe"}], longitude:40.9, latitude:-74.3 } ]
     }
 
     attached() {
@@ -20,6 +21,20 @@ export class employeeMap{
             this.map = new Microsoft.Maps.Map(mapWrapper, {
               credentials: 'At2-XQeVvD3BK82klFryRbBFXgVMv8T1fgOsMIV3CyRHOFRn_OXuVAoNNm_abD7C'
             });
+
+            this.viewChangeHandler = Microsoft.Maps.Events.addHandler(this.map, 'viewchange', e => {
+                this.location = this.map.getCenter();
+
+                this.employeeGroups.forEach(group =>{
+                    var location = new Microsoft.Maps.Location(group.longitude,group.latitude)
+                    var pushpin = new Microsoft.Maps.Pushpin(location);
+                    this.map.entities.push(pushpin)
+                })
+            });
+
+
+
+
         });
     }
 }
