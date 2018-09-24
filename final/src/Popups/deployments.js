@@ -1,10 +1,13 @@
+import { GridOptions, GridApi, ColumnApi } from "ag-grid-community";
 import { inject } from 'aurelia-framework';
-import { DialogController } from 'aurelia-dialog';
+import { DialogController } from 'aurelia-dialog';  
 
 @inject(DialogController)
 
 export class deployments {
-
+    mainEmployeeGridOptions = GridOptions
+    gridApi = GridApi
+    columnApi = ColumnApi;
     constructor(DialogController) {
         this.DialogController = DialogController;
         
@@ -22,8 +25,10 @@ export class deployments {
             sortingOrder: ['desc', 'asc', null],
             rowSelection: 'multiple',
             rowHeight: "40",
+            enableColResize:false
 
         };
+        this.deploymentGridOptions.enableColResize = false;
     }
     attached() {
        

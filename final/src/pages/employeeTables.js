@@ -153,4 +153,7 @@ export class employeeTable {
           });
     }
     
+    addEmployees(){
+        
+    }
 }

@@ -30,7 +30,7 @@ export class employeeMap{
 
             this.viewChangeHandler = Microsoft.Maps.Events.addHandler(this.map, 'viewchange', e => {
                 this.location = this.map.getCenter();
-
+                
                 
                 })
             });
