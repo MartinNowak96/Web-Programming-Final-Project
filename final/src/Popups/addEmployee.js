@@ -3,7 +3,7 @@ import { DialogController } from 'aurelia-dialog';
 
 @inject(DialogController)
 
-export class deployments {
+export class addEmployee {
     constructor(DialogController) {
         this.DialogController = DialogController;
         
@@ -12,19 +12,15 @@ export class deployments {
     }
 
     activate(model){
-        
+        this.model = model
     }
     attached() {
        
     }
 
     submit(){
-        let start = new Date(startDate.value);
-        
-        let end = endDate.value;
-        
-        console.log(endDate.value)
-
+        let employee = {id: this.model+1,name: first.value +" "+last.value, phone:phone.value, address:address.value + city.value + state.value + zip.value, deployed:"No"};
+        this.DialogController.ok(employee)
     }
 
     closePopUp(){

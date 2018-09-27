@@ -41,6 +41,10 @@ export class deploy {
         });
     }
 
+    activate(model) {
+        this.model = model
+    }
+
     submit() {
         let start = startDate.value;
         console.log(start);

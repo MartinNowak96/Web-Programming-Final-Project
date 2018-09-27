@@ -1,6 +1,7 @@
 import { GridOptions, GridApi, ColumnApi } from "ag-grid-community";
 import {deploy} from "Popups/deploy";
 import {deployments} from "Popups/deployments";
+import {addEmployee} from "Popups/addEmployee";
 import { inject } from 'aurelia-framework'
 import {DialogService} from 'aurelia-dialog';
 import { EventAggregator } from 'aurelia-event-aggregator';
@@ -105,7 +106,7 @@ export class employeeTable {
 
 
     setUpDeploy(){
-        this.DialogService.open({ viewModel: deploy, model:{employeeCount: this.deployData.length}, lock: true }).whenClosed(response => {
+        this.DialogService.open({ viewModel: deploy, model:this.deployData, lock: true }).whenClosed(response => {
             if (!response.wasCancelled) {
               
               
@@ -155,5 +156,21 @@ export class employeeTable {
     
     addEmployees(){
         
+              
+              
+        this.DialogService.open({ viewModel: addEmployee, model:this.employeeRowData.count, lock: true }).whenClosed(response => {
+            if (!response.wasCancelled) {
+           
+              this.employeeRowData.push(response.output)
+              this.mainEmployeeGridOptions.api.setRowData(this.employeeRowData)
+            
+              
+            } else {
+             
+            }
+            //console.log(response.output);
+            
+            
+          });
     }
 }
