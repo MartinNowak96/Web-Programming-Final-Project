@@ -1,12 +1,15 @@
 import { inject } from 'aurelia-framework';
+import { error } from "Popups/error";
 import { DialogController } from 'aurelia-dialog';
+import { DialogService } from 'aurelia-dialog';
 
-@inject(DialogController)
+@inject(DialogController, DialogService)
 
 export class deploy {
 
-    constructor(DialogController) {
+    constructor(DialogController, DialogService) {
         this.DialogController = DialogController;
+        this.DialogService = DialogService;
         const controlUrl = '//www.bing.com/api/maps/mapcontrol?callback=bingMapsLoaded';
         this.ready = new Promise(resolve => window['bingMapsLoaded'] = resolve);
 
@@ -32,10 +35,10 @@ export class deploy {
             this.mapClick = Microsoft.Maps.Events.addHandler(this.map, 'mousedown', e => {
                 console.log(e)
                 this.map.entities.clear();
-                var pushpinOptions = { };
+                var pushpinOptions = {};
                 var pushpin = new Microsoft.Maps.Pushpin(e.location, pushpinOptions);
                 this.map.entities.push(pushpin);
-                this.location = [e.location.longitude,e.location.latitude]
+                this.deployLocation = [e.location.longitude, e.location.latitude]
             });
 
         });
@@ -46,15 +49,38 @@ export class deploy {
     }
 
     submit() {
-        let start = startDate.value.toString().replace("-","/").replace("-","/");
-        start =  start.substring(5,7) +"/"+ start.substring(8,10) +"/"+start.substring(0,4);
-        console.log(start);
-        let end = endDate.value.toString().replace("-","/").replace("-","/");
-        end =  end.substring(5,7) +"/"+ end.substring(8,10) +"/"+end.substring(0,4);
-        console.log(end)
-        console.log(this.location)
-        let deploy = {location:this.location, descirption:description.value, startDate: start, endDate:end}
-        this.DialogController.close(deploy)
+
+        if(this.deployLocation == undefined || this.deployLocation == null ){
+            this.DialogService.open({ viewModel: error, model: { message: "Please use the map to select a deployment location." }, lock: true }).whenClosed(response => {
+
+            });
+        }
+        else if (startDate.value == "") {
+            this.DialogService.open({ viewModel: error, model: { message: "Please select a start date." }, lock: true }).whenClosed(response => {
+
+            });
+        } else if (startDate.value == "") {
+            this.DialogService.open({ viewModel: error, model: { message: "Please select an end date." }, lock: true }).whenClosed(response => {
+
+            });
+        }
+        else if (startDate.value.toString().replace("-","").replace("-","") > endDate.value.toString().replace("-","").replace("-","") ) {
+            this.DialogService.open({ viewModel: error, model: { message: "Starting Date must be before the ending date." }, lock: true }).whenClosed(response => {
+
+            });
+
+        } else {
+
+            let start = startDate.value.toString().replace("-", "/").replace("-", "/");
+            start = start.substring(5, 7) + "/" + start.substring(8, 10) + "/" + start.substring(0, 4);
+            console.log(start);
+            let end = endDate.value.toString().replace("-", "/").replace("-", "/");
+            end = end.substring(5, 7) + "/" + end.substring(8, 10) + "/" + end.substring(0, 4);
+            console.log(end)
+            console.log(this.deployLocation)
+            let deploy = { location: this.deployLocation, descirption: description.value, startDate: start, endDate: end }
+            this.DialogController.close(deploy)
+        }
 
     }
 

@@ -171,17 +171,15 @@ export class employeeTable {
  
     viewDeployment(){
         let selected = this.mainEmployeeGridOptions.api.getSelectedRows();
+        if(selected.length !=0){
         this.DialogService.open({ viewModel: deployments, model:selected[0], lock: true }).whenClosed(response => {
-            if (!response.wasCancelled) {
-              
-              
-            } else {
-             
-            }
-            //console.log(response.output);
-            
             
           });
+        }else{
+            this.DialogService.open({ viewModel: error, model:{message:"Please highlight one employee to view their deployments."}, lock: true }).whenClosed(response => {
+                                
+            });
+        }
     }
     
     addEmployees(){
