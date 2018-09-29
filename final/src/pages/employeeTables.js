@@ -1,5 +1,6 @@
 import { GridOptions, GridApi, ColumnApi } from "ag-grid-community";
 import {deploy} from "Popups/deploy";
+import {error} from "Popups/error";
 import {deployments} from "Popups/deployments";
 import {addEmployee} from "Popups/addEmployee";
 import { inject } from 'aurelia-framework'
@@ -129,6 +130,7 @@ export class employeeTable {
 
 
     setUpDeploy(){
+        if(this.deployData.length > 0){
         this.DialogService.open({ viewModel: deploy, model:this.deployData, lock: true }).whenClosed(response => {
             if (!response.wasCancelled) {
               
@@ -140,6 +142,11 @@ export class employeeTable {
             
             
           });
+        }else{
+            this.DialogService.open({ viewModel: error, model:{message:"There needs to be 1 or more employees in the deploy list to setup a deployment."}, lock: true }).whenClosed(response => {
+                                
+              });
+        }
         
     }
 
