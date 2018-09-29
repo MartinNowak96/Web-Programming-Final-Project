@@ -2,7 +2,6 @@ import { inject } from 'aurelia-framework';
 import { DialogController } from 'aurelia-dialog';  
 
 @inject(DialogController)
-
 export class addEmployee {
     constructor(DialogController) {
         this.DialogController = DialogController;

@@ -38,16 +38,39 @@ export class employeeTable {
             }
         })
 
-        this.employeeRowData = [{ id: '1' , name: "Martin Nowak", phone: "555-555-5555", address: "180 Smith Street, Middletown NY, 10940", deployed:"Yes", nextDeployDate: "", 
-        deployments:[{startDate: "8/2/2018", endDate: "8/3/2018"},{startDate: "8/20/2018", endDate: "8/22/2018"} ] },
+        this.employeeRowData = [{ id: '1' , name: "Martin Nowak", phone: "555-555-5555", address: "180 Smith Street, Middletown NY, 10940", deployed:"", nextDeployDate: "", 
+        deployments:[{startDate: "08/02/2018", endDate: "08/03/2018"},{startDate: "08/20/2018", endDate: "08/22/2018"}, {startDate: "9/20/2018", endDate: "10/22/2018", description:"Remove virus"} ] },
 
-        { id: '2' , name: "John Doe", phone: "555-555-5555", address: "180 Smith Street, Middletown NY, 10940", deployed:"Yes", nextDeployDate: "", 
-        deployments:[{startDate: "8/15/2018", endDate: "8/18/2018", description:"Fix computer"},{startDate: "8/20/2018", endDate: "8/22/2018", description:"Remove virus"},
+        { id: '2' , name: "John Doe", phone: "555-555-5555", address: "180 Smith Street, Middletown NY, 10940", deployed:"", nextDeployDate: "", 
+        deployments:[{startDate: "08/15/2018", endDate: "08/18/2018", description:"Fix computer"},{startDate: "8/20/2018", endDate: "8/22/2018", description:"Remove virus"},{startDate: "12/20/2018", endDate: "12/22/2018", description:"Remove virus"},
      ]  }]
 
         this.employeeRowData.forEach(employee => {
-            if(employee.deployments.length > 0){
-               employee.nextDeployDate = employee.deployments[0].startDate; //this has to be changed to see if todays date is in the date range of the first deployment
+            
+            let year = (new Date()).getFullYear().toString()
+            let month = (parseFloat((new Date()).getMonth())+1).toString();
+            let day = (new Date()).getDate();
+            if(parseFloat(month) <= 9){
+                month = "0"+month;
+            }
+            if(parseFloat(day) <= 9){
+                day = "0"+day;
+            }
+            let today = year + month +day;
+            employee.deployments.forEach(deployment =>{
+                let start = deployment.startDate.substring(6,10) + deployment.startDate.substring(0,2) + deployment.startDate.substring(3,5);
+                let end = deployment.endDate.substring(6,10) + deployment.endDate.substring(0,2) + deployment.endDate.substring(3,5);
+                if(start <= today && end >= today){
+                    employee.deployed="Yes";
+                    
+                }else if(start > today && employee.nextDeployDate == ""){
+                    employee.nextDeployDate = deployment.startDate;
+                }
+                
+
+            })
+            if(employee.deployed != "Yes"){
+                employee.deployed = "No"
             }
         });
 
