@@ -6,21 +6,27 @@ import {addEmployee} from "Popups/addEmployee";
 import { inject } from 'aurelia-framework'
 import {DialogService} from 'aurelia-dialog';
 import { EventAggregator } from 'aurelia-event-aggregator';
+import {Router} from 'aurelia-router';
+import {global} from 'global'
 
 
-@inject(DialogService, EventAggregator)
+@inject(DialogService, EventAggregator, Router, global)
 export class employeeTable {
     mainEmployeeGridOptions = GridOptions
     gridApi = GridApi
     columnApi = ColumnApi;
 
-    constructor(DialogService,EventAggregator) {
+    constructor(DialogService,EventAggregator, Router, global) {
         //console.log(this.gridOptions)
         this.ea = EventAggregator;
         this.DialogService = DialogService;
         this.isHalf = false;
-        
+        this.router = Router
+        if(global.isLoggedIn == false){
+          this.router.navigateToRoute('logIn')
+        }
 
+        
     }
         
 

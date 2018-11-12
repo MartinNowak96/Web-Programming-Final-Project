@@ -39,4 +39,18 @@ if($task == "getEmployees"){
   $myJSON = json_encode($employeesToSend);
   echo ($myJSON);
 }
+if($task == "login"){
+  $userName = $_GET["user"];
+  $pass = $_GET["pass"];
+  $file = file_get_contents("users.txt");
+  $user = explode("\n", $file);//seperate each line
+  $output = "false";
+  foreach ($user as $person) {
+    $userData = explode(',', $person);
+    if($userName == $userData[0] && $pass == $userData[1]){
+      $output = "true";
+    }
+  }
+  echo($output);
+}
 ?>

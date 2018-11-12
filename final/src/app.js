@@ -47,7 +47,6 @@ export class App {
 
 
   pageResize(e) {
-
     this.ea.publish('pageResize');
   }
 
