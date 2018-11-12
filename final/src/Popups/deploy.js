@@ -38,7 +38,7 @@ export class deploy {
                 var pushpinOptions = {};
                 var pushpin = new Microsoft.Maps.Pushpin(e.location, pushpinOptions);
                 this.map.entities.push(pushpin);
-                this.deployLocation = [e.location.longitude, e.location.latitude]
+                this.deployLocation = {long: e.location.longitude, lat: e.location.latitude}
             });
 
         });
@@ -73,13 +73,10 @@ export class deploy {
 
             let start = startDate.value.toString().replace("-", "/").replace("-", "/");
             start = start.substring(5, 7) + "/" + start.substring(8, 10) + "/" + start.substring(0, 4);
-            console.log(start);
             let end = endDate.value.toString().replace("-", "/").replace("-", "/");
             end = end.substring(5, 7) + "/" + end.substring(8, 10) + "/" + end.substring(0, 4);
-            console.log(end)
-            console.log(this.deployLocation)
-            let deploy = { location: this.deployLocation, descirption: description.value, startDate: start, endDate: end }
-            this.DialogController.close(deploy)
+            let deploy = { long: this.deployLocation.long,lat:this.deployLocation.lat, descirption: description.value, startDate: start, endDate: end }
+            this.DialogController.ok(deploy)
         }
 
     }

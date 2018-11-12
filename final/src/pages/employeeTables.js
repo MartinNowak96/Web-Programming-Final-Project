@@ -150,7 +150,10 @@ export class employeeTable {
         if(this.deployData.length > 0){
         this.DialogService.open({ viewModel: deploy, model:this.deployData, lock: true }).whenClosed(response => {
             if (!response.wasCancelled) {
-              
+              console.log(response)
+              this.deployData.forEach(employee=>{
+                employee.deployments.push(response.output)
+              })
               
             } else {
              

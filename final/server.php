@@ -29,6 +29,8 @@ if($task == "getEmployees"){
             $tempDeploy->startDate = $deploy[1];
             $tempDeploy->endDate = $deploy[2];
             $tempDeploy->description = $deploy[3];
+            $tempDeploy->long =$deploy[4];
+            $tempDeploy->lat =$deploy[5];
             array_push($userDeploy, $tempDeploy);
           }
         }
@@ -53,4 +55,25 @@ if($task == "login"){
   }
   echo($output);
 }
+if($task == "getDeployments"){
+  $file2 = file_get_contents("deployments.txt");
+  $deployements = explode("\n", $file2);//seperate each line
+  $sendArray= array();
+  foreach ($deployements as $deployement) {
+    $tempDeploy = null;
+    $deploy =explode(';', $deployement);
+    $deployEmployeeIDs =explode(',', $deploy[0]);
+    $tempDeploy->employees = $deployEmployeeIDs;
+    $tempDeploy->startDate = $deploy[1];
+    $tempDeploy->endDate = $deploy[2];
+    $tempDeploy->description = $deploy[3];
+    $tempDeploy->long =$deploy[4];
+    $tempDeploy->lat =$deploy[5];
+    array_push($sendArray, $tempDeploy);
+
+  }
+  echo(json_encode($sendArray));
+}
+
+
 ?>

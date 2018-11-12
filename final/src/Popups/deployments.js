@@ -11,8 +11,6 @@ export class deployments {
     constructor(DialogController) {
         this.DialogController = DialogController;
         
-        
-
     }
 
     activate(model){
