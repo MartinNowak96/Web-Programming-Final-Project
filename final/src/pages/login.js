@@ -7,6 +7,7 @@ export class login{
   constructor(router, global){
     this.router = router
     this.global = global
+    this.error=""
   }
     login(){
       let response = (e)=>{
@@ -16,6 +17,8 @@ export class login{
           if(e.currentTarget.responseText == "true"){
             this.global.isLoggedIn = true
             this.router.navigateToRoute("employeesTables")
+          }else{
+            this.error ="Login Failed"
           }
         
         }
