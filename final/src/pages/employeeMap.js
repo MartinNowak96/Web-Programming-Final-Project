@@ -23,24 +23,25 @@ export class employeeMap {
 
       });
 
-      this.employeeGroups.forEach(group => {
-        var location = new Microsoft.Maps.Location(group.longitude, group.latitude)
-        var pushpin = new Microsoft.Maps.Pushpin(location);
-        this.map.entities.push(pushpin)
+      
 
         this.viewChangeHandler = Microsoft.Maps.Events.addHandler(this.map, 'viewchange', e => {
           this.location = this.map.getCenter();
 
 
-        })
+        
       });
       let response = (e)=>{
           
         if (e.currentTarget.readyState==4 && e.currentTarget.status==200) {
           this.deployments = JSON.parse(e.currentTarget.responseText)
           
+          this.deployments.forEach(deploy => {
+            var location = new Microsoft.Maps.Location(deploy.long, deploy.lat)
+            var pushpin = new Microsoft.Maps.Pushpin(location);
+            this.map.entities.push(pushpin)
          
-        console.log(this.employeeRowData)
+          })
 
         }
       }
