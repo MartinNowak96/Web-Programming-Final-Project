@@ -18,7 +18,7 @@ export class addEmployee {
     }
 
     submit(){
-        let employee = {id: this.model+1,name: first.value +" "+last.value, phone:phone.value, address:address.value + city.value + state.value + zip.value, deployed:"No"};
+        let employee = {id: this.model+1,first:first.value, last:last.value,name: first.value +" "+last.value, phone:phone.value, address:address.value +" " + city.value+ " " + state.value  + " "+ zip.value, deployed:"No"};
         this.DialogController.ok(employee)
     }
 

@@ -41,7 +41,7 @@ if($task == "getEmployees"){
   $myJSON = json_encode($employeesToSend);
   echo ($myJSON);
 }
-if($task == "login"){
+else if($task == "login"){
   $userName = $_GET["user"];
   $pass = $_GET["pass"];
   $file = file_get_contents("users.txt");
@@ -55,7 +55,7 @@ if($task == "login"){
   }
   echo($output);
 }
-if($task == "getDeployments"){
+else if($task == "getDeployments"){
   $file2 = file_get_contents("deployments.txt");
   $deployements = explode("\n", $file2);//seperate each line
   $sendArray= array();
@@ -74,6 +74,18 @@ if($task == "getDeployments"){
   }
   echo(json_encode($sendArray));
 }
+else if($task == "addEmployee"){
+  $id = $_GET["id"];
+  $first = $_GET["f"];
+  $last = $_GET["l"];
+  $address= $_GET["add"];
+  $phone = $_GET["phone"];
 
+  $file = file_get_contents('employees.txt');
+  $file.="\n".$id.",".$first.",".$last.",".$phone.",".$address;
+  file_put_contents("employees.txt", $file);
+  
+
+}
 
 ?>

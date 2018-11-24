@@ -23,14 +23,14 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <ag-grid-aurelia id="employeeGrid" #agGrid class="ag-theme-balham" enable-col-resize
-                            grid-options.bind="mainEmployeeGridOptions" api="mainEmployeeGridOptions.api"
+                        <ag-grid-aurelia id="employeeGrid" #agGrid class="ag-theme-balham" enable-col-resize row-selection="multiple"
+                            grid-options.bind="mainEmployeeGridOptions"  api="mainEmployeeGridOptions.api"
                             grid-ready.call="onReady($event)" row-data.bind="mainEmployeeGridOptions.rowData" css=" height:${employeeGridHeight}px">
-                            <ag-grid-column header-name="Name" field="name" width.bind="150"></ag-grid-column>
-                            <ag-grid-column header-name="Phone" field="phone" width.bind="150"></ag-grid-column>
-                            <ag-grid-column header-name="Address" field="address" width.bind="150"></ag-grid-column>
-                            <ag-grid-column header-name="Currently Deployed" field="deployed" width.bind="150"></ag-grid-column>
-                            <ag-grid-column header-name="Next Deploy Date" field="nextDeployDate" width.bind="150"></ag-grid-column>
+                            <ag-grid-column editable="false" header-name="Name" field="name" width.bind="150"></ag-grid-column>
+                            <ag-grid-column editable="false" header-name="Phone" field="phone" width.bind="150"></ag-grid-column>
+                            <ag-grid-column editable="false" header-name="Address" field="address" width.bind="150"></ag-grid-column>
+                            <ag-grid-column editable="false" header-name="Currently Deployed" field="deployed" width.bind="150"></ag-grid-column>
+                            <ag-grid-column editable="false" header-name="Next Deploy Date" field="nextDeployDate" width.bind="150"></ag-grid-column>
                         </ag-grid-aurelia>
                     </div>
                 </div>
@@ -76,11 +76,11 @@
                     <div class="col">
                         <ag-grid-aurelia #agGrid class="ag-theme-balham" enable-col-resize grid-options.bind="deployGridOptions"
                             api="deployGridOptions.api" grid-ready.call="onReady($event)" row-data.bind="rowData" css="width:100%; height:${deployHeight}px">
-                            <ag-grid-column header-name="Name" field="name" width.bind="150"></ag-grid-column>
-                            <ag-grid-column header-name="Phone" field="phone" width.bind="150"></ag-grid-column>
-                            <ag-grid-column header-name="Address" field="address" width.bind="150"></ag-grid-column>
-                            <ag-grid-column header-name="Currently Deployed" field="deployed" width.bind="150"></ag-grid-column>
-                            <ag-grid-column header-name="Next Deploy Date" field="nextDeployDate" width.bind="150"></ag-grid-column>
+                            <ag-grid-column editable="false" header-name="Name" field="name" width.bind="150"></ag-grid-column>
+                            <ag-grid-column editable="false" header-name="Phone" field="phone" width.bind="150"></ag-grid-column>
+                            <ag-grid-column editable="false" header-name="Address" field="address" width.bind="150"></ag-grid-column>
+                            <ag-grid-column editable="false" header-name="Currently Deployed" field="deployed" width.bind="150"></ag-grid-column>
+                            <ag-grid-column editable="false" header-name="Next Deploy Date" field="nextDeployDate" width.bind="150"></ag-grid-column>
 
                         </ag-grid-aurelia>
                     </div>
