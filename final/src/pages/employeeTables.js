@@ -22,6 +22,7 @@ export class employeeTable {
         this.DialogService = DialogService;
         this.isHalf = false;
         this.router = Router
+        this.global = global;
         if(global.isLoggedIn == false){
           this.router.navigateToRoute('logIn')
         }
@@ -31,10 +32,6 @@ export class employeeTable {
         
 
     attached() {
-
-        this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight- deployHeader.offsetHeight - deployButtons.offsetHeight-50)/2;
-        this.deployHeight = this.employeeGridHeight;
-        this.deployData = [];
         this.subscription = this.ea.subscribe('pageResize', response =>{
             if(this.isHalf == false){
                 this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight- deployHeader.offsetHeight - deployButtons.offsetHeight-50)/2;
@@ -44,6 +41,12 @@ export class employeeTable {
                 this.deployHeight = this.employeeGridHeight;
             }
         })
+        if(this.global.isLoggedIn){
+
+        this.employeeGridHeight = (window.innerHeight - employeeGrid.offsetTop -employeeGridButtons.offsetHeight- deployHeader.offsetHeight - deployButtons.offsetHeight-50)/2;
+        this.deployHeight = this.employeeGridHeight;
+        this.deployData = [];
+        
         let response = (e)=>{
           
           if (e.currentTarget.readyState==4 && e.currentTarget.status==200) {
@@ -112,7 +115,7 @@ export class employeeTable {
             rowHeight: "40",
 
         };
-
+    }
     }
 
     rotateTables() {
@@ -220,5 +223,9 @@ export class employeeTable {
             
             
           });
+    }
+
+    detached() {
+        this.subscription.dispose();
     }
 }

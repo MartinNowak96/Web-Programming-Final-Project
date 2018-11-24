@@ -8,11 +8,7 @@ export class employeeMap {
     this.scriptTag.async = true;
     this.scriptTag.defer = true;
     this.scriptTag.src = controlUrl;
-
-
-    this.employeeGroups = [{ groupID: 1, employees: [{ name: "Martin Nowak" }, { name: "John Doe" }], longitude: 40.7, latitude: -74 },
-    { groupID: 2, employees: [{ name: "Martin Nowak" }, { name: "John Doe" }], longitude: 40.71, latitude: -74.1 },
-    { groupID: 3, employees: [{ name: "Martin Nowak" }, { name: "John Doe" }], longitude: 40.9, latitude: -74.3 }]
+    this.employeeGroups =[]
   }
 
   attached() {
@@ -43,6 +39,58 @@ export class employeeMap {
          
           })
 
+          let response = (e)=>{
+          
+            if (e.currentTarget.readyState==4 && e.currentTarget.status==200) {
+              this.employeeRowData = JSON.parse(e.currentTarget.responseText)
+              this.employeeRowData.forEach(employee => {
+              
+                let year = (new Date()).getFullYear().toString()
+                let month = (parseFloat((new Date()).getMonth())+1).toString();
+                let day = (new Date()).getDate();
+                if(parseFloat(month) <= 9){
+                    month = "0"+month;
+                }
+                if(parseFloat(day) <= 9){
+                    day = "0"+day;
+                }
+                let today = year + month +day;
+                employee.deployments.forEach(deployment =>{
+                    let start = deployment.startDate.substring(6,10) + deployment.startDate.substring(0,2) + deployment.startDate.substring(3,5);
+                    let end = deployment.endDate.substring(6,10) + deployment.endDate.substring(0,2) + deployment.endDate.substring(3,5);
+                    if(start <= today && end >= today){
+                        employee.deployed="Yes";
+                        
+                    }else if(start > today && employee.nextDeployDate == ""){
+                      employee.deployed = "No"
+                        employee.nextDeployDate = deployment.startDate;
+                    }
+                    
+    
+                })
+            });
+
+            let count = 0
+                this.deployments.forEach( deploy=>{
+                  count += 1;
+                  let group ={groupID:count,employees:[] }
+                  deploy.employees.forEach( deployEmployee=>{
+                    this.employeeRowData.forEach(employee2=>{
+                      if(deployEmployee ==employee2.id){
+                        group.employees.push({name:employee2.name})
+                      }
+                    })
+                  })
+                  this.employeeGroups.push(group)
+                })
+            console.log(this.employeeRowData)
+            }
+          }
+          let xmlhttp=new XMLHttpRequest();
+          xmlhttp.open("POST","https://turing.manhattan.edu/~mnowak01/final/server.php?task=getEmployees",true);
+          xmlhttp.onreadystatechange=response
+          xmlhttp.send();
+
         }
       }
       let xmlhttp=new XMLHttpRequest();
@@ -50,6 +98,7 @@ export class employeeMap {
       xmlhttp.onreadystatechange=response
       xmlhttp.send();
 
+      
 
 
     });
