@@ -9,6 +9,7 @@ export class employeeMap {
     this.scriptTag.defer = true;
     this.scriptTag.src = controlUrl;
     this.employeeGroups =[]
+    this.showHover = false;
   }
 
   attached() {
@@ -36,7 +37,16 @@ export class employeeMap {
             var location = new Microsoft.Maps.Location(deploy.long, deploy.lat)
             var pushpin = new Microsoft.Maps.Pushpin(location);
             this.map.entities.push(pushpin)
-         
+            Microsoft.Maps.Events.addHandler(pushpin, "mouseover", e=>{
+              let pixel = this.map.tryLocationToPixel( pushpin.getLocation(), Microsoft.Maps.PixelReference.control);
+              console.log(pixel)
+              this.popupX = pixel.x + 10;
+              this.popupY = pixel.y - 10
+              this.showHover = true;
+            })
+            Microsoft.Maps.Events.addHandler(pushpin, "mouseout", e=>{
+              this.showHover = false;
+            })
           })
 
           let response = (e)=>{

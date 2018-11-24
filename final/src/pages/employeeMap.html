@@ -22,8 +22,12 @@
 
             </div>
 
-            <div class="col" style="padding:0px">
-                <div id="mapWrapper" style="height:100vh">
+            <div class="col" style="padding:0px; overflow:hidden">
+                <div show.bind="showHover" css="position:absolute; left:${popupX}px; top:${popupY}px;  z-index:2 ;width: 270px;height:150px; background-color:white; border: solid 1px purple">
+                    <font>Employees</font>
+                    <font>Description</font>
+                </div>
+                <div id="mapWrapper" style="height:100vh; z-index:1">
 
                 </div>
             </div>
