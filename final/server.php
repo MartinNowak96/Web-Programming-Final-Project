@@ -87,5 +87,18 @@ else if($task == "addEmployee"){
   
 
 }
+else if($task == "addDeployment"){
+  $lat = $_GET["lat"];
+  $long = $_GET["long"];
+  $employees =$_GET["employ"];
+  $desc = $_GET["desc"];
+  $start = $_GET["start"];
+  $end = $_GET["end"];
+  $file2 = file_get_contents("deployments.txt");
+  $file2.="\n".$employees.";".$start.";".$end.";". $desc.";".$long.";".$lat;
+  
+  file_put_contents('deployments.txt', $file2);
+
+}
 
 ?>

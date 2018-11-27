@@ -140,10 +140,23 @@ export class employeeTable {
         if (this.deployData.length > 0) {
             this.DialogService.open({ viewModel: deploy, model: this.deployData, lock: true }).whenClosed(response => {
                 if (!response.wasCancelled) {
-                    console.log(response)
+                    let employ = "";
                     this.deployData.forEach(employee => {
                         employee.deployments.push(response.output)
+                        employ += ","+employee.id;
                     })
+                    employ =employ.replace(",", "")
+                    console.log(response.output)
+                    let response2= (e)=>{
+                        if (e.currentTarget.readyState == 4 && e.currentTarget.status == 200) {
+                            console.log(e.currentTarget.responseText)
+                        }
+                    }
+                    let xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = response2
+                   xmlhttp.open("POST", "https://turing.manhattan.edu/~mnowak01/final/server.php?task=addDeployment&lat="+ response.output.long +"&long="+response.output.lat  +"&employ="+employ+"&desc="+response.output.descirption+"&start="+response.output.startDate + "&end=" + response.output.endDate , true);
+                    xmlhttp.send();
+
 
                 } else {
 
