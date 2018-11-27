@@ -23,9 +23,21 @@
             </div>
 
             <div class="col" style="padding:0px; overflow:hidden">
-                <div show.bind="showHover" css="position:absolute; left:${popupX}px; top:${popupY}px;  z-index:2 ;width: 270px;height:150px; background-color:white; border: solid 1px purple">
-                    <font>Employees</font>
-                    <font>Description</font>
+                <div show.bind="showHover" css="position:absolute; left:${popupX}px; top:${popupY}px;  z-index:2 ;width: 270px;height:auto; background-color:white; border: solid 1px purple">
+                    <b>Employees:</b>
+                <br/>
+                <template repeat.for="employee of hoverEmployees">
+                    ${employee.name}
+                    </template>
+                    <br/>
+                    <b>Description:</b>
+                    <br/>
+                    ${description}
+                    <br/>
+                    <b>Date Range:</b>
+                    <br/>
+                    ${dateRange}
+                    <br/>
                 </div>
                 <div id="mapWrapper" style="height:100vh; z-index:1">
 

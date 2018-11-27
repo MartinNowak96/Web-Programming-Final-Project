@@ -32,14 +32,20 @@ export class employeeMap {
           
         if (e.currentTarget.readyState==4 && e.currentTarget.status==200) {
           this.deployments = JSON.parse(e.currentTarget.responseText)
-          
+          let count  = 0;
           this.deployments.forEach(deploy => {
             var location = new Microsoft.Maps.Location(deploy.long, deploy.lat)
             var pushpin = new Microsoft.Maps.Pushpin(location);
+            pushpin.metadata = {index: count}
+            count +=1;
             this.map.entities.push(pushpin)
             Microsoft.Maps.Events.addHandler(pushpin, "mouseover", e=>{
               let pixel = this.map.tryLocationToPixel( pushpin.getLocation(), Microsoft.Maps.PixelReference.control);
-              console.log(pixel)
+              console.log(this.employeeGroups[pushpin.metadata.index])
+              this.hoverEmployees = this.employeeGroups[pushpin.metadata.index].employees
+              console.log(deploy)
+              this.description = deploy.description
+              this.dateRange = deploy.startDate + " - " + deploy.endDate;
               this.popupX = pixel.x + 10;
               this.popupY = pixel.y - 10
               this.showHover = true;
