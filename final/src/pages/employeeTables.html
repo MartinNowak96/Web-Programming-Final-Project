@@ -25,7 +25,7 @@
                     <div class="col">
                         <ag-grid-aurelia id="employeeGrid" #agGrid class="ag-theme-balham" enable-col-resize row-selection="multiple"
                             grid-options.bind="mainEmployeeGridOptions"  api="mainEmployeeGridOptions.api"
-                            grid-ready.call="onReady($event)" row-data.bind="mainEmployeeGridOptions.rowData" css=" height:${employeeGridHeight}px">
+                             row-data.bind="mainEmployeeGridOptions.rowData" css=" height:${employeeGridHeight}px">
                             <ag-grid-column editable="false" header-name="Name" field="name" width.bind="150"></ag-grid-column>
                             <ag-grid-column editable="false" header-name="Phone" field="phone" width.bind="150"></ag-grid-column>
                             <ag-grid-column editable="false" header-name="Address" field="address" width.bind="150"></ag-grid-column>

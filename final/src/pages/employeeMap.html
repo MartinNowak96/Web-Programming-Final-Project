@@ -1,52 +1,53 @@
 <template>
-    <div class="container-fluid">
+  <div class="container-fluid">
 
-        <div class="row">
+    <div class="row">
 
-            <div class="col-auto" style="padding:0px; width:300px;background-color:rgb(70, 70, 70); text-align:center">
-                <h2 style="color:white; text-decoration:underline">Deployed Groups</h2>
+      <div class="col-auto" style="padding:0px; width:300px;background-color:rgb(70, 70, 70); text-align:center">
+        <h2 style="color:white; text-decoration:underline">Deployed Groups</h2>
+        <div css="height: ${height}px; overflow:auto">
+        <template repeat.for="group of employeeGroups">
+          <div style="background-color:blueviolet; color:white; font-size:23px">
+            ${group.groupID}
+          </div>
 
-                <template repeat.for="group of employeeGroups">
-                    <div style="background-color:blueviolet; color:white; font-size:23px">
-                        ${group.groupID}
-                    </div>
 
-
-                    <template repeat.for="employee of group.employees">
-                        <div style="color:white; font-size:20   px">
-                            ${employee.name}
-                        </div>
-
-                    </template>
-                </template>
-
+          <template repeat.for="employee of group.employees">
+            <div style="color:white; font-size:20   px">
+              ${employee.name}
             </div>
 
-            <div class="col" style="padding:0px; overflow:hidden">
-                <div show.bind="showHover" css="position:absolute; left:${popupX}px; top:${popupY}px;  z-index:2 ;width: 270px;height:auto; background-color:white; border: solid 1px purple">
-                    <b>Employees:</b>
-                <br/>
-                <template repeat.for="employee of hoverEmployees">
-                    ${employee.name}
-                    </template>
-                    <br/>
-                    <b>Description:</b>
-                    <br/>
-                    ${description}
-                    <br/>
-                    <b>Date Range:</b>
-                    <br/>
-                    ${dateRange}
-                    <br/>
-                </div>
-                <div id="mapWrapper" style="height:100vh; z-index:1">
+          </template>
+        </template>
+        </div>
+        <input type="date" style="position: absolute; bottom: 15px; left: 62px" change.delegate="dateChange()" />
+      </div>
 
-                </div>
-            </div>
-
+      <div class="col" style="padding:0px; overflow:hidden">
+        <div show.bind="showHover" css="position:absolute; left:${popupX}px; top:${popupY}px;  z-index:2 ;width: 270px;height:auto; background-color:white; border: solid 1px purple">
+          <b>Employees:</b>
+          <br />
+          <template repeat.for="employee of hoverEmployees">
+            ${employee.name}
+          </template>
+          <br />
+          <b>Description:</b>
+          <br />
+          ${description}
+          <br />
+          <b>Date Range:</b>
+          <br />
+          ${dateRange}
+          <br />
+        </div>
+        <div id="mapWrapper" style="height:100vh; z-index:1">
 
         </div>
+      </div>
+
 
     </div>
+
+  </div>
 
 </template>

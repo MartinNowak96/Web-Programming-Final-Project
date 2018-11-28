@@ -33,7 +33,10 @@ if($task == "getEmployees"){
             $tempDeploy->lat =$deploy[5];
             array_push($userDeploy, $tempDeploy);
           }
+
         }
+        $deploy = null;
+        $deployEmployeeIDs = null;
       }
       $userObject->deployments = $userDeploy;
       array_push($employeesToSend, $userObject);
