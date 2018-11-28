@@ -166,9 +166,6 @@ export class employeeTable {
     }
   }
 
-  onReady(e) {
-
-  }
 
 
   setUpDeploy() {

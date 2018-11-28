@@ -33,7 +33,6 @@ export class deploy {
             });
 
             this.mapClick = Microsoft.Maps.Events.addHandler(this.map, 'mousedown', e => {
-                console.log(e)
                 this.map.entities.clear();
                 var pushpinOptions = {};
                 var pushpin = new Microsoft.Maps.Pushpin(e.location, pushpinOptions);
