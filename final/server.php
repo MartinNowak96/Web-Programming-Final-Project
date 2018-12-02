@@ -13,6 +13,8 @@ if($task == "getEmployees"){
       $userObject = null;
       $userObject->id = $user[0];
       $userObject->name = $user[1]." ".$user[2];
+      $userObject->first = $user[1];
+      $userObject->last = $user[2];
       $userObject->phone = $user[3];
       $userObject->address = $user[4];
       $userDeploy = array();
@@ -47,7 +49,7 @@ if($task == "getEmployees"){
 else if($task == "login"){
   $userName = $_GET["user"];
   $pass = $_GET["pass"];
-  $file = file_get_contents("users.txt");
+  $file = file_get_contents("../../users.txt");
   $user = explode("\n", $file);//seperate each line
   $output = "false";
   foreach ($user as $person) {

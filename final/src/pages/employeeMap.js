@@ -110,6 +110,9 @@ export class employeeMap {
     for(let i = 0; i < pins.length+1; i ++){
       this.map.entities.pop()
     }
+    for(let i = 0; i < pins.length+1; i ++){
+      this.map.entities.pop()
+    }
     
     this.addPinsToMap()
     this.employeeGroups =[]

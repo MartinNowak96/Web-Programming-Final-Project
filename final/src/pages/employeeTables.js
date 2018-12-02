@@ -68,9 +68,9 @@ export class employeeTable {
               console.log(this.deployments)
               this.employeeRowData.forEach(employee => {
                 employee.deployments = []
-                this.deployments.forEach(deploy =>{
-                  deploy.employees.forEach(id=>{
-                    if(employee.id == id){
+                this.deployments.forEach(deploy => {
+                  deploy.employees.forEach(id => {
+                    if (employee.id == id) {
                       employee.deployments.push(deploy)
                     }
                   })
@@ -88,15 +88,15 @@ export class employeeTable {
                 })
                 if (employee.deployed != "Yes") {
                   employee.deployed = "No"
-                  employee.deployments.forEach(deployment =>{
+                  employee.deployments.forEach(deployment => {
                     let start = deployment.startDate.substring(6, 10) + deployment.startDate.substring(0, 2) + deployment.startDate.substring(3, 5);
-                    if(deploy.nextDeployDate == null ){
-                      if(start > today){
+                    if (deploy.nextDeployDate == null) {
+                      if (start > today) {
                         employee.nextDeployDate = deployment.startDate
                       }
-                    }else{
+                    } else {
                       let date = deployment.startDate.substring(6, 10) + deployment.startDate.substring(0, 2) + deployment.startDate.substring(3, 5);
-                      if(start > date){
+                      if (start > date) {
                         employee.nextDeployDate = deployment.startDate
                       }
                     }
@@ -166,7 +166,34 @@ export class employeeTable {
     }
   }
 
+  editEmployee() {
+    let selected = this.mainEmployeeGridOptions.api.getSelectedRows();
+    if (selected.length == 1) {
+      this.DialogService.open({ viewModel: addEmployee, model: { type:"edit",employee:selected[0] }, lock: true }).whenClosed(response => {
+        if (!response.wasCancelled) {
+          let xmlhttp = new XMLHttpRequest();
+          let response2 = (e) => {
+            if (e.currentTarget.readyState == 4 && e.currentTarget.status == 200) {
+              console.log(e.currentTarget.responseText)
+            }
+          }
+          console.log(response.output)
+          //xmlhttp.open("POST", "https://turing.manhattan.edu/~mnowak01/final/server.php?task=editEmployee&id=" + response.output.id.toString() + "&f=" + response.output.first + "&l=" + response.output.last + "&phone=" + response.output.phone + "&add=" + response.output.address, true);
+          xmlhttp.onreadystatechange = response2
+          xmlhttp.send();
+          this.employeeRowData.push(response.output)
+          this.mainEmployeeGridOptions.api.setRowData(this.employeeRowData)
 
+
+        } else {
+
+        }
+        //console.log(response.output);
+
+
+      });
+    }
+  }
 
   setUpDeploy() {
     if (this.deployData.length > 0) {
@@ -239,7 +266,7 @@ export class employeeTable {
 
   addEmployees() {
 
-    this.DialogService.open({ viewModel: addEmployee, model: this.employeeRowData.length, lock: true }).whenClosed(response => {
+    this.DialogService.open({ viewModel: addEmployee, model: { type: "add", id: this.employeeRowData.length }, lock: true }).whenClosed(response => {
       if (!response.wasCancelled) {
         let xmlhttp = new XMLHttpRequest();
         let response2 = (e) => {

@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="col-auto" style="padding:0px">
-                        <button class="btn" style="background-color: blueviolet; color:white">Edit Info</button>
+                        <button class="btn" style="background-color: blueviolet; color:white" click.delegate="editEmployee()">Edit Info</button>
                     </div>
 
                     <div class="col-auto">
@@ -75,7 +75,7 @@
                 <div class="row">
                     <div class="col">
                         <ag-grid-aurelia #agGrid class="ag-theme-balham" enable-col-resize grid-options.bind="deployGridOptions"
-                            api="deployGridOptions.api" grid-ready.call="onReady($event)" row-data.bind="rowData" css="width:100%; height:${deployHeight}px">
+                            api="deployGridOptions.api"  row-data.bind="rowData" css="width:100%; height:${deployHeight}px">
                             <ag-grid-column editable="false" header-name="Name" field="name" width.bind="150"></ag-grid-column>
                             <ag-grid-column editable="false" header-name="Phone" field="phone" width.bind="150"></ag-grid-column>
                             <ag-grid-column editable="false" header-name="Address" field="address" width.bind="150"></ag-grid-column>
