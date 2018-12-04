@@ -36,6 +36,7 @@ export class addEmployee {
         employee = {id: this.model.id+1,first:first.value, last:last.value,name: first.value +" "+last.value, phone:phone.value, address:address.value, deployed:"No"};
       }
       else{
+        employee = {id: this.model.id+1,first:first.value, last:last.value,name: first.value +" "+last.value, phone:phone.value, address:address.value, deployed:"No"};
 
       }
         this.DialogController.ok(employee)

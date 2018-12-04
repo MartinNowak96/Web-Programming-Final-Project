@@ -105,5 +105,32 @@ else if($task == "addDeployment"){
   file_put_contents('deployments.txt', $file2);
 
 }
+else if($task == "editEmployee"){
+  $id = $_GET["id"];
+  $first = $_GET["f"];
+  $last = $_GET["l"];
+  $address= $_GET["add"];
+  $phone = $_GET["phone"];
+  $outputFileContent ="";
+  $file = file_get_contents('employees.txt');
+  $employees = explode("\n", $file);
+
+  $count = 0;
+  foreach ($employees as $person ) {
+    $user = explode(",", $person);
+    
+    if($count != 0){
+      $outputFileContent.="\n";
+    }
+    if($user[0] == $id){
+      $outputFileContent.= $id.",".$first.",".$last.",".$phone.",".$address;
+    }else{
+      $outputFileContent.= $person;
+    }
+    $count = $count + 1;
+  }
+  //echo($outputFileContent);
+  file_put_contents('employees.txt', $outputFileContent);
+}
 
 ?>

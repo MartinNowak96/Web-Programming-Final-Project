@@ -178,10 +178,18 @@ export class employeeTable {
             }
           }
           console.log(response.output)
-          //xmlhttp.open("POST", "https://turing.manhattan.edu/~mnowak01/final/server.php?task=editEmployee&id=" + response.output.id.toString() + "&f=" + response.output.first + "&l=" + response.output.last + "&phone=" + response.output.phone + "&add=" + response.output.address, true);
+          xmlhttp.open("POST", "https://turing.manhattan.edu/~mnowak01/final/server.php?task=editEmployee&id=" + selected[0].id + "&f=" + response.output.first + "&l=" + response.output.last + "&phone=" + response.output.phone + "&add=" + response.output.address, true);
           xmlhttp.onreadystatechange = response2
           xmlhttp.send();
-          this.employeeRowData.push(response.output)
+          
+          for(let i = 0; i < this.employeeRowData.length; i++){
+            if(this.employeeRowData[i].id == selected[0].id){
+              this.employeeRowData[i] = response.output
+              this.employeeRowData[i].id = selected[0].id;
+            
+            }
+          }
+        
           this.mainEmployeeGridOptions.api.setRowData(this.employeeRowData)
 
 

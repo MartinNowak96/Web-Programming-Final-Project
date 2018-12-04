@@ -109,6 +109,8 @@ export class employeeMap {
     let pins = this.map.entities.getPrimitives();
     for(let i = 0; i < pins.length+1; i ++){
       this.map.entities.pop()
+      this.map.entities.pop()
+      this.map.entities.pop()
     }
     for(let i = 0; i < pins.length+1; i ++){
       this.map.entities.pop()
