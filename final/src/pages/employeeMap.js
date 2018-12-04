@@ -1,8 +1,10 @@
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { inject } from 'aurelia-framework'
-@inject(EventAggregator)
+import { Router } from 'aurelia-router';
+import { global } from 'global'
+@inject(EventAggregator, global, Router)
 export class employeeMap {
-  constructor(EventAggregator) {
+  constructor(EventAggregator, global, router) {
     this.ea = EventAggregator;
     const controlUrl = '//www.bing.com/api/maps/mapcontrol?callback=bingMapsLoaded';
     this.ready = new Promise(resolve => window['bingMapsLoaded'] = resolve);
@@ -13,13 +15,19 @@ export class employeeMap {
     this.scriptTag.src = controlUrl;
     this.employeeGroups = []
     this.showHover = false;
+    this.router = router
+    this.global = global;
+    if (global.isLoggedIn == false) {
+      this.router.navigateToRoute('logIn')
+    }
   }
 
   attached() {
     this.subscription = this.ea.subscribe('pageResize', response => {
       this.height = window.innerHeight - 100;
     })
-    mapWrapper.appendChild(this.scriptTag)
+    if (this.global.isLoggedIn)
+{    mapWrapper.appendChild(this.scriptTag)
     this.ready.then(() => {
       this.map = new Microsoft.Maps.Map(mapWrapper, {
         credentials: 'At2-XQeVvD3BK82klFryRbBFXgVMv8T1fgOsMIV3CyRHOFRn_OXuVAoNNm_abD7C'
@@ -93,7 +101,7 @@ export class employeeMap {
 
     });
   }
-
+  }
 
   dateChange() {
     let date = dateSelect.value.toString().replace("-", "/").replace("-", "/");
